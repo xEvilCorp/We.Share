@@ -1,0 +1,99 @@
+
+
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/css/dist/base.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/dist/topmenu.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/dist/leftmenu.min.css">
+    <!---<link rel="stylesheet" type="text/css" media="screen" href="~/lib/bootstrap/css/bootstrap.min.css">--->
+    <link rel="stylesheet" type="text/css" media="screen" href="~/lib/fontawesome/css/all.min.css">
+    @RenderSection("AddToHead", required: false)
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/popper/popper.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: min-content auto;
+            grid-template-rows: max-content auto;
+            grid-template-areas: "menuTop menuTop" "menuLateral content";
+        }
+        body > header:first-child {
+            grid-area: menuTop;
+        }
+        body > aside:first-child {
+            grid-area: menuLateral;
+        }
+        body > .content:first-child{
+            grid-area: content;
+        }
+
+    </style>
+</head>
+
+<body style="height: 100%">
+    <partial name="MenuTop" />
+    <partial name="MenuLateral" />
+    <section class="content">
+        @RenderBody()
+    </section>
+</section>
+
+
+
+<script>
+    $("#notification").click(function (e) {
+        e.stopPropagation();
+        $('#notification .tab').toggle('fast');
+        $('#conta .tab').hide();
+    });
+    $("#notification .tab").click(function (e) {
+        e.stopPropagation();
+        $('#notification .tab').show();
+    });
+    $("#conta").click(function (x) {
+        x.stopPropagation();
+        $('#conta .tab').toggle('fast');
+        $('#notification .tab').hide();
+    });
+    $("#conta .tab").click(function (x) {
+        x.stopPropagation();
+        $('#conta .tab').show();
+    });
+    $(document).click(function () {
+        $('#notification .tab').hide();
+        $('#conta .tab').hide();
+    });
+    $('#menutop #btnExpandir').click(function () {
+        $('#menuLateral').toggle();
+    });
+    $('#menuLateral > #btnSubscriptions').click(function () {
+        $('#menuLateral > #subscriptions').toggle('fast');
+        $('#menuLateral > #btnSubscriptions .expand i').toggle();
+        $('#menuLateral > #btnSubscriptions').toggleClass('active');
+    });
+    $('#menuLateral > #btnComunidades').click(function () {
+        $('#menuLateral > #btnComunidades').toggleClass('active');
+        $('#menuLateral > #comunidades').toggle('fast');
+        $('#menuLateral > #btnComunidades .expand i').toggle();
+    });
+    $('#menuLateral > footer #btnToggleMenu').click(function () {
+        $('#menuLateral .expand').toggle();
+        $('#menuLateral > footer #btnToggleMenu i').toggle();
+        $('#menuLateral').toggleClass('closed');
+        $('#rodape').toggle();
+        $('#menuLateral > #subscriptions .iconeNot').toggle();
+        $('#menuLateral > #comunidades .iconeNot').toggle();
+    });
+</script>
+@RenderSection("scripts", false)
+
+</body>
+
+</html>

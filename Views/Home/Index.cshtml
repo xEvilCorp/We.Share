@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Thing";
+    Layout = "~/Views/Shared/Layout/_main.cshtml"; 
+}
+<style>
+    .container {
+        max-width: 800px;
+    }
+    #ad {
+        background-color: black;
+        display: block;
+    }
+    #imgAnuncio:hover{
+        opacity: 0.7;
+        transition: 1s;
+    }
+</style>
+
+<div id="back">
+    <div class="container">
+        <p style="color: white">@ViewData["log_User_Id"]</p>
+        <p style="color: white">@ViewData["log_User_Name"]</p>
+        <a id="ad" href="https://usegiraffe.com/kit-moletom-jaqueta-bomber-ug-cinza-escuro-preto.html?gclid=Cj0KCQjw7YblBRDFARIsAKkK-dJWN1umoo20in1nK4debQyLAydw24AIU36zG73YmW3THazZLztDJ6gaApygEALw_wcB" target="blanket">
+        <img src="img/anuncio2.png" id="imgAnuncio"/>
+        </a>
+        <div class="col-12">
+            <div class="row bg-light pt-3 pb-3">
+                <video-card tipo="1" titulo="HxH Op" views="4000300" hash="WZN0pGnFbQg" data="03/05/2018 18:22" collection="Michael Reeves" duration="16:39" class="col-sm-3"></video-card>
+                <video-card tipo="1" titulo= "Five Movements" views="305541" hash="dgdhsjs12" data="03/05/2009 21:04" collection="TheOA" duration="12:43" class="col-sm-3"></video-card>
+                <video-card tipo="1" titulo= "Radiohead é muito bom" views="45600" hash="ncdmjdhd" data="6/11/2006 00:02" collection="Radiohead" duration="3:52" class="col-sm-3"></video-card>
+                <video-card tipo="1" titulo= "Congrats" views="1500456" hash="dehdhfdf" data="04/01/2019 00:02" collection="Pewdiepie" duration="12:03" class="col-sm-3 mb-3"></video-card>
+                <video-card tipo="1" titulo="Daenerys Epic Moment" views="300" hash="kpinccaeif" data="03/05/2015 18:22" collection="HBO" duration="5:00" class="col-sm-3"></video-card>
+                <video-card tipo="1" titulo= "Nilce e Leon" views="1305541" hash="klmbow54" data="03/30/2018 21:04" collection="Cadeachave" duration="12:43" class="col-sm-3"></video-card>
+                <video-card tipo="1" titulo= "Como defender o nazismo" views="60456" hash="juck34rabi" data="10/12/2018 00:02" collection="Artemis Mitz" duration="2:09" class="col-sm-3"></video-card>
+                <video-card tipo="1" titulo= "I love cats" views="500456" hash="lçoddsscv" data="07/07/2011 00:02" collection="schmoyoho" duration="2:28" class="col-sm-3"></video-card>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+</div>
+
+<script src="~/js/components/videocard.js"></script>

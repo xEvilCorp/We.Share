@@ -1,0 +1,143 @@
+@{    
+    ViewData["Title"] = "Signup";  
+    Layout = "~/Views/Shared/Layout/_clean.cshtml"; 
+}   
+
+@section AddToHead{
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">  
+}
+
+<style>
+    #back {
+        width: 100%;
+        height: 100%; 
+        overflow: auto;
+        background-image: linear-gradient(45deg, #550080, #00122b);
+    }
+    #logo img {
+        display: block;
+        width: 100%;
+    }
+    #logo {
+        max-width: 400px;
+        margin:auto;
+        margin-top: 8px;
+        position:relative;
+    }
+    .container {
+        max-width: 800px;
+    }
+    #login {
+        max-width: 530px;
+        margin: auto;
+        background-color:white;
+        margin-top: 20px;
+        padding: 25px;
+    }
+    .title {
+        text-align: center;
+    }
+    #title-text {
+        font-family: "Raleway Thin", sans-serif;
+        font-size: 20px;
+        display: block;
+
+    }
+    label {
+        margin-top: 5px;
+        margin-bottom: 1px;
+    }
+    
+    .underline-title {
+        background: -webkit-linear-gradient(right, #2c04b3, #bd2d86);
+        height: 2px;
+        margin-bottom: 10px;
+        width: 100%;
+        display: block;
+    }
+    #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%; 
+        min-height: 100%; 
+        opacity: 0.7;
+        z-index: 0;
+        margin-right: 16px;
+    }
+    .invalid {
+        border-color: red;
+    }
+</style>
+<!---<video autoplay muted loop id="myVideo">
+  <source src="~/media/back10.mp4" type="video/mp4">
+</video>--->
+<div id="back">
+    <div id="logo">
+        <img src="~/img/logo2.svg" alt="WeShare">
+    </div>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12">
+                <div id="login" class="rounded">
+                    <div class="title">
+                        <h3 id="title-text">Sign Up</h3>
+                        <div class="underline-title"></div>
+                    </div>
+                    <form asp-action="Signup" method="POST">
+                        <div class="row">
+                            <div class="form-group mb-1 col-sm-6">    
+                                <label for="firstname" class="control-label">Nome</label>    
+                                <input id="firstname" name="firstname" class="form-control"/>    
+                            </div> 
+                            <div class="form-group mb-1 col-sm-6">    
+                                <label for="lastname" class="control-label">Sobrenome</label>    
+                                <input id="lastname" name="lastname" class="form-control"/>    
+                            </div>   
+                        </div>     
+                        <div class="row">
+                            <div class="form-group mb-1 col-sm-6">    
+                                <label for="username" class="control-label">Usuário</label>    
+                                <input id="username" name="username" class="form-control" required/>    
+                            </div> 
+                            <div class="form-group mb-1 col-sm-6">    
+                                <label for="gender" class="control-label">Gênero</label>    
+                                <select id="gender" name="gender" class="form-control" required>   
+                                    <option value="0">Selecione o gênero</option>    
+                                    @{foreach(Gender gender in (List<Gender>)ViewData["Genders"]) {
+                                    <option value="@gender.Id">@gender.Description</option>    
+                                    }}
+                                </select>         
+                            </div>         
+                        </div>       
+                        <div class="form-group mb-1">    
+                            <label for="email" class="control-label">Email</label>    
+                            <input id="email" name="email" class="form-control" required/>    
+                        </div>                     
+                        <div class="row">
+                            <div class="form-group mb-1 col-sm-6">    
+                                <label for="password" class="control-label">Senha</label>    
+                                <input id="password" name="password" type="password" class="form-control" required />    
+                            </div> 
+                            <div class="form-group mb-1 col-sm-6">    
+                                <label for="password2" class="control-label">Confirmar senha</label>    
+                                <input id="password2" name="password2" type="password" class="form-control" />    
+                            </div>   
+                        </div>       
+                        <ul id="error" style="color:red"></ul>
+                        <button type="submit"  onclick="" class="btn btn-success form-control mt-2">Cadastrar</button>
+                    </form>
+                    <a href="Index"  class="btn btn-primary form-control mt-2" >Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+<script>
+
+    
+</script>
+}
+  
+  

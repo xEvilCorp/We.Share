@@ -1,0 +1,143 @@
+@{    
+    ViewData["Title"] = "Account";  
+    Layout = "~/Views/Shared/Layout/_main.cshtml"; 
+    WeShare.Web.ApplicationUser u = ViewData["user"] as WeShare.Web.ApplicationUser;
+    string profilePicture = ViewData["userProfilePicturePath"] as string;
+}    
+@section AddToHead{
+    <link href="~/css/dist/account.min.css" rel="stylesheet">
+    <link href="~/lib/croppie/croppie.css" rel="stylesheet">
+}
+
+
+<main>
+    <section class="topArea"></section>
+    <aside>
+        <h2>Account</h2>
+        <a href="#1">Verify Email</a>
+        <a href="account/edit">Profile Settings</a>
+        <a href="#3">Manage account</a>
+    </aside> 
+    <section class="accountEdit">
+        <section class="profilePicture">
+            @{
+                if(!u.HasProfilePicture){
+                    <img id="profilePicture" class="myPfp" src="~/img/default-avatar.jpg" alt="pfp">
+                }
+                else {
+                    <img id="profilePicture" class="myPfp" src="@profilePicture" alt="pfp">
+                }
+            }
+            <button id="updateImage" ><i class="fas fa-pen"></i></button>
+        </section>
+        
+        <img id="imgCrop" src="" alt="" >
+
+        <form action="" method="POST">
+            <div class="form-item">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="firstname" value="@u.FirstName" placeholder="First name">
+            </div>
+            <div class="form-item">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="lastname" value="@u.LastName" placeholder="Last name">
+            </div>
+            <div class="form-item">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email"  value="@u.Email" placeholder="Email">
+            </div>
+            <div class="form-item">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username"  value="@u.UserName" placeholder="Username">
+            </div>
+            <div class="form-item">
+                <label for="password">Current Password</label>
+                <input type="password" name="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-item">
+                <label for="newpassword">New Password</label>
+                <input type="password" name="newpassword" id="newpassword" placeholder="New password">
+            </div>
+            <div class="form-item">
+                <label for="newpassword2">Confirm New Password</label>
+                <input type="password" name="newpassword2" id="newpassword2" placeholder="Confirm new password">
+            </div>
+            <button type="submit" class="saveBtn">Save</button>
+        </form>
+    </section>
+</main>
+<div id="modalFoto" class="painelModal" style="display:none;">
+    <div class="modal">
+       <input id="hdnFile" type="file" style="display:none" >
+        <div>
+            <div id="upload-demo" class="center-block ready"></div>
+        </div> 
+        <button id="btnCrop"><i class="fas fa-check"></i></button>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/croppie/croppie.js"></script>
+    <script>
+    $("#updateImage").on("click", function() {
+        $("#hdnFile").trigger("click");
+    });
+    var $uploadCrop,tempFilename,rawImg,imageId;
+    $uploadCrop = $('#upload-demo').croppie({
+    	viewport: {
+    		width: 200,
+    		height: 200
+    	},
+    	enforceBoundary: true,
+    	enableExif: true
+    });
+    $("#hdnFile").change( function() {
+        imageId = $(this).data('id'); 
+        tempFilename = $(this).val();
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                rawImg = e.target.result;
+                $uploadCrop.croppie('bind', {
+				    url: rawImg
+				});
+                $("#modalFoto").toggle();
+            }
+            reader.readAsDataURL(this.files[0]);
+        }else{
+            swal("Sorry - you're browser doesn't support the FileReader API");
+        }
+    });
+    $('#btnCrop').on('click', function (ev) {
+    	$uploadCrop.croppie('result', {
+    		type: 'base64',
+    		format: 'jpeg',
+    		size: {width: 200, height: 200}
+    	}).then(function (resp) {
+    		$('.myPfp').attr('src', resp);
+            $.ajax({
+                url: "changeProfilePicture",
+                type: "POST",
+                data: {profilePicture: resp},
+                cache: false,
+                beforeSend: function() {
+                    $('#btnCrop').html('<img src="../img/loading-sm.svg" width="30" height="30"/>');
+                }, 
+                success: function(html){
+                    /*$('#error').html(html);*/
+                    $('#btnCrop').html('<i class="fas fa-check"></i>');
+                    $('.painelModal').hide();
+                }
+            });
+    	});
+    });
+    $('.painelModal').on('click', function () {
+        $('.painelModal').hide();
+    });
+    $('.modal').on('click', function (e) {
+        e.stopPropagation();
+    });
+    </script>
+}
+
+/*<div id="error"></div>*/

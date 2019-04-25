@@ -1,0 +1,29 @@
+@model WeShare.Web.ApplicationUser;
+
+
+
+@{
+    if(Model!=null) {
+    <div id="conta">
+        <img src="~/img/default-avatar.jpg" class="myPfp" alt="profile picture">
+        <div class="tab">
+            <a href="User/" class="item">
+                <i class="fas fa-user"></i>
+                <p>Conta</p>
+            </a>
+            <a href="#" class="item">
+                <i class="fas fa-cog"></i>
+                <p>Canal</p>
+            </a>
+            <hr>
+            <a href="#" class="item">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Logout</p>
+            </a>
+        </div>
+    </div>
+    }
+    else{
+    <button id="btnlogin" class="btn btn-outline-light btn-sm" >Login</button>
+    }
+}

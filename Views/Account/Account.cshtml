@@ -1,0 +1,55 @@
+@{    
+    ViewData["Title"] = "Account";  
+    Layout = "~/Views/Shared/Layout/_main.cshtml"; 
+    WeShare.Web.ApplicationUser u = ViewData["user"] as WeShare.Web.ApplicationUser;
+    string profilePicture = ViewData["userProfilePicturePath"] as string;
+}    
+@section AddToHead{
+    <link href="~/css/dist/account.min.css" rel="stylesheet">
+}
+
+
+<main>
+    <section class="topArea"></section>
+    <aside>
+        <h2>Account</h2>
+        <a href="#1">Verify Email</a>
+        <a href="edit">Profile Settings</a>
+        <a href="#3">Manage account</a>
+    </aside> 
+    <section class="accountIndex">
+        <section class="profilePicture">
+            @{
+                if(!u.HasProfilePicture){
+                    <img id="profilePicture" class="myPfp" src="~/img/default-avatar.jpg" alt="pfp">
+                }
+                else {
+                    <img id="profilePicture" class="myPfp" src="@profilePicture" alt="pfp">
+                }
+            }
+        </section>
+        <h3 id="name">@u.FirstName @u.LastName<span id="username"> #@u.UserName</span></h3>
+        <section class="stats">
+            <section class="comments">
+                <i class="far fa-comments"></i>
+                <p>1.325</p> 
+                <p>comentários feitos</p>
+            </section>
+            <section class="likes">
+                <i class="far fa-thumbs-up"></i>
+                <p>468</p>
+                <p>likes dados</p>
+            </section>
+            <section class="videos">
+                <i class="far fa-play-circle"></i>
+                <p>4.124</p>
+                <p>vídeos assistidos</p>
+            </section>
+            <section class="time">
+                <i class="fas fa-video"></i>
+                <p>239</p>
+                <p>horas assistidas</p> 
+            </section>
+        </section>
+    </section>
+</main>

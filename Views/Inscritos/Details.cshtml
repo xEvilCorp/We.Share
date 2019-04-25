@@ -1,0 +1,36 @@
+@model WeShare.Web.Data.InscritosCanal
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InscritosCanal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Notificar)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notificar)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CanalNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CanalNavigation.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserNavigation.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

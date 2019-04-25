@@ -1,0 +1,15 @@
+<header>
+    <nav id="menutop" class="p2">
+        <button id="btnExpandir" data-tooltip="Menu"><i class="fas fa-bars"></i></button>
+        <img id="logo" src="~/img/logo.png" alt="WeShare">
+        @await Component.InvokeAsync("SearchVideoBar", new { maxPriority = 2, isDone = false })
+        <div class="info">
+            <button class="btn" id="upload">
+                <i class="fas fa-arrow-circle-up"></i>
+                <span class="text">Upload</span>
+            </button>
+            @await Component.InvokeAsync("MenuNotification", new { maxPriority = 2, isDone = false })
+            @await Component.InvokeAsync("MenuAccount")
+        </div>
+    </nav>
+</header>
